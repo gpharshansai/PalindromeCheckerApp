@@ -1,4 +1,23 @@
-import java.util.*;
+import java.util.Scanner;
+
+class PalindromeService {
+
+    public boolean checkPalindrome(String input) {
+
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+
+        return true;
+    }
+}
 
 public class PalindromeCheckerApp {
 
@@ -8,22 +27,10 @@ public class PalindromeCheckerApp {
         System.out.print("Input: ");
         String input = sc.nextLine();
 
-        LinkedList<Character> list = new LinkedList<>();
+        PalindromeService service = new PalindromeService();
+        boolean result = service.checkPalindrome(input);
 
-        for (char c : input.toCharArray()) {
-            list.add(c);
-        }
-
-        boolean isPalindrome = true;
-
-        while (list.size() > 1) {
-            if (!list.removeFirst().equals(list.removeLast())) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        System.out.println("Is Palindrome? : " + isPalindrome);
+        System.out.println("Is Palindrome? : " + result);
 
         sc.close();
     }
