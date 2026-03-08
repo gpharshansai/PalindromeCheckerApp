@@ -1,33 +1,51 @@
-﻿import java.util.Scanner;
+import java.util.*;
 
 public class PalindromeCheckerApp {
+
+    public static boolean twoPointerCheck(String input) {
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+            if (input.charAt(start) != input.charAt(end))
+                return false;
+            start++;
+            end--;
+        }
+
+        return true;
+    }
+
+    public static boolean recursiveCheck(String input, int start, int end) {
+        if (start >= end)
+            return true;
+
+        if (input.charAt(start) != input.charAt(end))
+            return false;
+
+        return recursiveCheck(input, start + 1, end - 1);
+    }
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a string to check if it is a palindrome: ");
-        String input = scanner.nextLine();
 
-        // Normalize by removing non-alphanumeric characters and lowercasing
-        String normalized = input.replaceAll("[^A-Za-z0-9]", "").toLowerCase();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Input: ");
+        String input = sc.nextLine();
 
-        boolean isPalindrome = true;
-        int left = 0;
-        int right = normalized.length() - 1;
+        long start1 = System.nanoTime();
+        boolean result1 = twoPointerCheck(input);
+        long end1 = System.nanoTime();
 
-        while (left < right) {
-            if (normalized.charAt(left) != normalized.charAt(right)) {
-                isPalindrome = false;
-                break;
-            }
-            left++;
-            right--;
-        }
+        long start2 = System.nanoTime();
+        boolean result2 = recursiveCheck(input, 0, input.length() - 1);
+        long end2 = System.nanoTime();
 
-        if (isPalindrome) {
-            System.out.println("The input is a palindrome (ignoring non-alphanumeric characters).");
-        } else {
-            System.out.println("The input is NOT a palindrome.");
-        }
+        System.out.println("Two Pointer Result: " + result1);
+        System.out.println("Execution Time: " + (end1 - start1) + " ns");
 
-        scanner.close();
+        System.out.println("Recursive Result: " + result2);
+        System.out.println("Execution Time: " + (end2 - start2) + " ns");
+
+        sc.close();
     }
 }
