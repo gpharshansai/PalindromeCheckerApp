@@ -1,19 +1,33 @@
+﻿import java.util.Scanner;
+
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
-        // Hardcoded string to check
-        String original = "madam";
-        String reversed = "";
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string to check if it is a palindrome: ");
+        String input = scanner.nextLine();
 
-        // Logic to reverse the string
-        for (int i = original.length() - 1; i >= 0; i--) {
-            reversed += original.charAt(i);
+        // Normalize by removing non-alphanumeric characters and lowercasing
+        String normalized = input.replaceAll("[^A-Za-z0-9]", "").toLowerCase();
+
+        boolean isPalindrome = true;
+        int left = 0;
+        int right = normalized.length() - 1;
+
+        while (left < right) {
+            if (normalized.charAt(left) != normalized.charAt(right)) {
+                isPalindrome = false;
+                break;
+            }
+            left++;
+            right--;
         }
 
-        // Print the result based on the comparison
-        if (original.equals(reversed)) {
-            System.out.println("The string '" + original + "' is a palindrome.");
+        if (isPalindrome) {
+            System.out.println("The input is a palindrome (ignoring non-alphanumeric characters).");
         } else {
-            System.out.println("The string '" + original + "' is NOT a palindrome.");
+            System.out.println("The input is NOT a palindrome.");
         }
+
+        scanner.close();
     }
 }
