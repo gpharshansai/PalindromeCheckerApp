@@ -1,33 +1,28 @@
-﻿import java.util.Scanner;
-
+import java.util.Stack;
 public class PalindromeCheckerApp {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a string to check if it is a palindrome: ");
-        String input = scanner.nextLine();
+    public class UseCase5PalindromeCheckerApp {
+        public static void main(String[] args) {
 
-        // Normalize by removing non-alphanumeric characters and lowercasing
-        String normalized = input.replaceAll("[^A-Za-z0-9]", "").toLowerCase();
+            String input = "noon";
 
-        boolean isPalindrome = true;
-        int left = 0;
-        int right = normalized.length() - 1;
+            Stack<Character> stack = new Stack<>();
 
-        while (left < right) {
-            if (normalized.charAt(left) != normalized.charAt(right)) {
-                isPalindrome = false;
-                break;
+
+            for (char c : input.toCharArray()) {
+                stack.push(c);
             }
-            left++;
-            right--;
-        }
 
-        if (isPalindrome) {
-            System.out.println("The input is a palindrome (ignoring non-alphanumeric characters).");
-        } else {
-            System.out.println("The input is NOT a palindrome.");
-        }
+            boolean isPalindrome = true;
 
-        scanner.close();
+
+            for (char c : input.toCharArray()) {
+                if (c != stack.pop()) {
+                    isPalindrome = false;
+                    break;
+                }
+            }
+
+            System.out.println("Input: " + input);
+            System.out.println("Is Palindrome? " + isPalindrome);
+        }
     }
-}
