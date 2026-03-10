@@ -1,31 +1,37 @@
 import java.util.*;
 
+class PalindromeService {
+
+    public boolean checkPalindrome(String input) {
+
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+
+        return true;
+    }
+}
+
 public class PalindromeCheckerApp {
+
     public static void main(String[] args) {
 
-        String input = "refer";
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Input: ");
+        String input = sc.nextLine();
 
-        Deque<Character> deque = new ArrayDeque<>();
+        PalindromeService service = new PalindromeService();
+        boolean result = service.checkPalindrome(input);
 
-        // Add characters to deque
-        for (char c : input.toCharArray()) {
-            deque.addLast(c);
-        }
+        System.out.println("Is Palindrome? " + result);
 
-        boolean isPalindrome = true;
-
-        // Compare first and last characters
-        while (deque.size() > 1) {
-            char first = deque.removeFirst();
-            char last = deque.removeLast();
-
-            if (first != last) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        System.out.println("Input: " + input);
-        System.out.println("Is Palindrome? " + isPalindrome);
+        sc.close();
     }
 }
