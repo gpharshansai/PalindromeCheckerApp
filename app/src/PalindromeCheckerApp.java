@@ -7,16 +7,19 @@ public class PalindromeCheckerApp {
 
         Deque<Character> deque = new ArrayDeque<>();
 
-
+        // Add characters to deque
         for (char c : input.toCharArray()) {
             deque.addLast(c);
         }
 
         boolean isPalindrome = true;
 
-
+        // Compare first and last characters
         while (deque.size() > 1) {
-            if (!deque.removeFirst().equals(deque.removeLast())) {
+            char first = deque.removeFirst();
+            char last = deque.removeLast();
+
+            if (first != last) {
                 isPalindrome = false;
                 break;
             }
